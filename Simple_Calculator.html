@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            background-color: #757171;
+        }
+        #calculator {
+            width: 300px;
+            margin: 100px auto;
+            border: 2px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            box-shadow: 5px 5px 5px 1px rgb(36, 36, 36);
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            font-size: 18px;
+            border: 1px solid #000000;
+            border-radius: 3px;
+            box-shadow: 5px 5px 5px 1px rgb(36, 36, 36);
+        }
+        button {
+            width: 48px;
+            height: 48px;
+            font-size: 30px;
+            margin: 5px;
+            border: 1px solid #020202;
+            background-color: #fff;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: 5px 5px 5px 1px rgb(36, 36, 36);
+        }
+        #result {
+            text-align: center;
+            width: 250px;
+            margin: 20px auto;
+            border: 2px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            box-shadow: 5px 5px 5px 1px rgb(36, 36, 36);
+        }
+        #cll{
+            width: 280px;
+        }
+        #eql{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <div id="cll">
+        <input  type="number" id="operand1" placeholder="NUMBER 1">
+        <input style="margin-top: 10px; margin-bottom: 20px;" type="number" id="operand2" placeholder="NUMBER 2">
+    </div>
+        <div>
+            <button id="bttn" onclick="operate('+')">+</button>
+            <button id="bttn" onclick="operate('-')">-</button>
+            <button id="bttn" onclick="operate('x')">*</button>
+            <button id="bttn" onclick="operate('/')">/</button>
+            <button onclick="calculate()" id="eql">=</button>
+        </div>
+        <div>
+            <p id="result"><b>Result</b></p>
+        </div>
+    </div>
+    <script>
+        let operand1 = document.getElementById("operand1");
+        let operand2 = document.getElementById("operand2");
+        let result = document.getElementById("result");
+        let operation = null;
+        function operate(op) {
+            operation = op;
+        }
+        function calculate() {
+            const num1 = parseFloat(operand1.value);
+            const num2 = parseFloat(operand2.value);
+            if (isNaN(num1) || isNaN(num2)) {
+                result.textContent = "Invalid input";
+            } else {
+                let resultValue;
+                switch (operation) {
+                    case '+':
+                        resultValue = num1 + num2;
+                        break;
+                    case '-':
+                        resultValue = num1 - num2;
+                        break;
+                    case 'x':
+                        resultValue = num1 * num2;
+                        break;
+                    case '/':
+                        if (num2 === 0) {
+                            resultValue = "Cannot divide by zero";
+                        } else {
+                            resultValue = num1 / num2;
+                        }
+                        break;
+                    default:
+                        resultValue = "No operation selected";
+                        break;
+                }
+                result.textContent = `Result: ${resultValue}`;
+            }
+        }
+    </script>
+</body>
+</html>
